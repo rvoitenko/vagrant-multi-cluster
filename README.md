@@ -18,3 +18,6 @@ node1:      332
 node2:      334
 node3:      334
 ```
+As bonus I've added nginx real-time statistic for upstream status(almost like in haproxy):
+
+http://192.168.50.10/status
