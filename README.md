@@ -4,7 +4,14 @@
 =================
 Demo illustrating vagrant+ansible setup of nginx load balancers and desired number of web nodes behind it.
 
-Please edit Vagrantfile before run and define the desirend number of web nodes. 
+Please edit Vagrantfile before run and define the desirend number of web nodes, then:
+
+```
+vagrant up
+....
+....
+==> lb: Balancer status url is http://192.168.50.10/status
+```
 
 Private IP(192.168.50.10) of load balancer is hardcoded, but can be also changed in case of conflict with local network.
 
