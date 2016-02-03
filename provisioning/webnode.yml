@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: true
+  tasks:
+
+   - name: Installing nginx package
+     apt: pkg=nginx state=installed update_cache=true
+     register: nginx
+
+   - name:  Uploading default index.html for host
+     template: src=templates/nginx_index.j2 dest=/usr/share/nginx/html/index.html
+     when: nginx|success
+
+   - name:  Upload nginx vhost
+     template: src=templates/nginx_web.j2 dest=/etc/nginx/sites-available/default
+     when: nginx|success
+     notify:
+       - Restarting nginx
+
+  handlers:
+     - name: Restarting nginx
+       action: service name=nginx state=restarted

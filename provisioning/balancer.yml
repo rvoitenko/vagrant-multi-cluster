@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: true
+  tasks:
+
+   - copy: src=files dest=/tmp
+
+   - apt: deb="/tmp/files/nginx-common_1.4.6-1ubuntu3.3_all.deb"
+   - apt: deb="/tmp/files/nginx-full_1.4.6-1ubuntu3.3_amd64.deb"
+   - copy: src=files/nginx.conf dest=/etc/nginx
+
+   - name: Configuring nginx
+     template: src=templates/nginx_lb.j2 dest=/etc/nginx/sites-available/default
+     notify:
+       - Restarting nginx
+
+  handlers:
+     - name: Restarting nginx
+       action: service name=nginx state=restarted

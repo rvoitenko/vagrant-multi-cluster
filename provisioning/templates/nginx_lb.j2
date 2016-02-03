@@ -1,0 +1,15 @@
+  upstream backend  {
+    {% for host in groups['webservers'] %}
+       server {{ hostvars[host].ansible_eth1.ipv4.address }};
+    {% endfor %}
+  }
+  server {
+    location /status {
+            vhost_traffic_status_display;
+            vhost_traffic_status_display_format html;
+    }
+
+    location / {
+      proxy_pass  http://backend;
+    }
+  }
