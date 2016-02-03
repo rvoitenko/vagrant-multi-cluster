@@ -4,7 +4,7 @@
 =================
 Demo illustrating vagrant+ansible setup of nginx load balancers and desired number of web nodes behind it.
 
-Please edit Vagrantfile before run and define the desirend number of web nodes, then:
+Please edit variable NODE_COUNT inVagrantfile before run if you need more than 3 web nodes(default vale). Then run:
 
 ```
 vagrant up
