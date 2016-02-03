@@ -30,7 +30,7 @@ As bonus I've added nginx real-time statistic for upstream status(almost like in
 http://192.168.50.10/status
 
 
-To change the cluster edit the NODE_COUNT Vagrantfile and run
+To change the cluster size edit the NODE_COUNT Vagrantfile and run
 
 ```
 vagrant up
