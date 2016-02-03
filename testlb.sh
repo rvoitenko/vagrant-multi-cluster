@@ -24,15 +24,14 @@ fi
 
 echo "Sending ${number} requests to http://${host}/..."
 
-
 for ((i=1;i<=${number};i++)); do
-   curl -s http://${host}/ > /dev/null
+   curl -s http://${host}/ >> requests_out
 done
 
 
-# lets grab statistic from all web nodes
+# lets calc statistic
 for node in $(vagrant status|grep node|awk {'print $1'}); do 
-    ip=$(vagrant ssh ${node} -c "ifconfig eth1|grep -oP 'inet addr:\K\S+'|tr -d '\n'")
-    requests=$(curl -s "http://${ip}/status"|grep -Ev '[a-zA-Z]' | cut -f4 -d' ') 
-    echo "${node}: ${requests}"
+    requests_count=$(cat requests_out|grep ${node}|wc -l)
+    echo "${node}: ${requests_count}"
 done
+rm -f requests_out 
