@@ -4,7 +4,7 @@
 =================
 Demo illustrating vagrant+ansible setup of nginx load balancers and desired number of web nodes behind it.
 
-Please edit variable NODE_COUNT inVagrantfile before run if you need more than 3 web nodes(default vale). Then run:
+Please edit variable NODE_COUNT in Vagrantfile before run if you need more than 3 web nodes(default vale). Then run:
 
 ```
 vagrant up
@@ -28,3 +28,11 @@ node3:      334
 As bonus I've added nginx real-time statistic for upstream status(almost like in haproxy):
 
 http://192.168.50.10/status
+
+
+To change the cluster edit the NODE_COUNT Vagrantfile and run
+
+```
+vagrant up
+vagrant provision
+```
